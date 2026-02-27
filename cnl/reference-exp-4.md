@@ -1,4 +1,4 @@
-(this originally had images of the software and its terminal (?) output)
+[[editor note: this originally had images of the software and its terminal (?) output]]
 
 Step 1: First, open the cisco packet tracer desktop and select the devices given below:
 S.NO Device Model-Name
