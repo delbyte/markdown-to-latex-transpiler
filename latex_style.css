@@ -1,0 +1,95 @@
+body {
+    font-family: "Latin Modern Roman", "Computer Modern Roman", "Times New Roman", Times, serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    text-align: justify;
+    color: #000;
+    margin: 1in;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    font-weight: bold;
+    color: #000;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    page-break-before: always;
+}
+
+h2:first-of-type {
+    page-break-before: avoid;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+pre,
+code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9em;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+pre {
+    padding: 10px;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+}
+
+/* Page numbering for PDF */
+.page-break {
+    page-break-after: always;
+}
+
+@page {
+    margin: 1in;
+}
