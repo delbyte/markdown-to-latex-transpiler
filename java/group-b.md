@@ -569,3 +569,235 @@ This is a method inside a final class.
 
 **Conclusion:**
 The final keyword in Java ensures immutability, prevents method overriding, and avoids inheritance, promoting more reliable and secure code. It enforces constraints at the compilation level, making the program predictable and easier to maintain.
+
+---
+
+## Assignment No. 12
+**Title:** JAVA Exception Handling - Write a program that calculates result of division of 2 numbers. Implement Exception Handling to handle Divide by Zero Exception and display an appropriate message.
+
+**Objective:**
+To implement exception handling in Java programs for safe division operation and graceful handling of divide-by-zero runtime errors.
+
+**Theory:**
+An exception in Java is an event that interrupts the normal flow of program execution. For arithmetic operations, dividing by zero throws an `ArithmeticException`. Using `try`, `catch`, and `finally` blocks helps avoid abrupt program termination and improves robustness.
+
+- `try`: contains risky code
+- `catch`: handles the raised exception
+- `finally`: executes whether exception occurs or not
+
+**Code:**
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter first number: ");
+            int num1 = sc.nextInt();
+
+            System.out.print("Enter second number: ");
+            int num2 = sc.nextInt();
+
+            int result = num1 / num2;
+            System.out.println("Result = " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught: Cannot divide by zero.");
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numeric values.");
+        } finally {
+            sc.close();
+            System.out.println("Program execution completed.");
+        }
+    }
+}
+```
+
+**Output:**
+```
+Enter first number: 25
+Enter second number: 0
+Exception caught: Cannot divide by zero.
+Program execution completed.
+```
+
+**Conclusion:**
+In this way, Java exception handling was implemented to detect and handle divide-by-zero and invalid input conditions, making the program reliable and user-friendly.
+
+---
+
+## Assignment No. 13
+**Title:** JAVA Inheritance - Build a class hierarchy for Bank Account (Saving Account, Current Account) with Base Class `BankAccount`. Override `calculateInterest()` method based on specific account type.
+
+**Objective:**
+To implement method overriding using inheritance in Java and demonstrate runtime polymorphism with bank account types.
+
+**Theory:**
+Method overriding allows a subclass to provide its own implementation of a method already defined in the parent class. It is used to achieve runtime polymorphism. In this assignment, `SavingAccount` and `CurrentAccount` override `calculateInterest()` of base class `BankAccount` with different interest rates.
+
+**Code:**
+```java
+class BankAccount {
+    String accountHolder;
+    double balance;
+
+    BankAccount(String accountHolder, double balance) {
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    double calculateInterest() {
+        return 0.0;
+    }
+
+    void displayDetails() {
+        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Balance: Rs " + balance);
+        System.out.println("Interest: Rs " + calculateInterest());
+    }
+}
+
+class SavingAccount extends BankAccount {
+    SavingAccount(String accountHolder, double balance) {
+        super(accountHolder, balance);
+    }
+
+    @Override
+    double calculateInterest() {
+        return balance * 0.04; // 4% annual interest
+    }
+}
+
+class CurrentAccount extends BankAccount {
+    CurrentAccount(String accountHolder, double balance) {
+        super(accountHolder, balance);
+    }
+
+    @Override
+    double calculateInterest() {
+        return balance * 0.01; // 1% annual interest
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount saving = new SavingAccount("Alice", 50000);
+        BankAccount current = new CurrentAccount("Bob", 50000);
+
+        System.out.println("--- Saving Account ---");
+        saving.displayDetails();
+
+        System.out.println("\n--- Current Account ---");
+        current.displayDetails();
+    }
+}
+```
+
+**Output:**
+```
+--- Saving Account ---
+Account Holder: Alice
+Balance: Rs 50000.0
+Interest: Rs 2000.0
+
+--- Current Account ---
+Account Holder: Bob
+Balance: Rs 50000.0
+Interest: Rs 500.0
+```
+
+**Conclusion:**
+In this way, method overriding was successfully implemented in Java inheritance. Different account types used their own `calculateInterest()` behavior while sharing a common base class structure.
+
+---
+
+## Assignment No. 14
+**Title:** JAVA Method Overloading - Design and develop a Java program for Library Catalog system. Create overloaded methods for adding and searching books using `addBook()` and `searchBook()`.
+
+**Objective:**
+To understand and implement method overloading in Java by creating multiple `addBook()` and `searchBook()` methods with different parameter lists.
+
+**Theory:**
+Method overloading allows more than one method with the same name in a class, provided their parameter lists differ by number, type, or order. It improves readability and flexibility by grouping similar operations under one method name.
+
+**Code:**
+```java
+import java.util.ArrayList;
+
+class Book {
+    int id;
+    String title;
+    String author;
+
+    Book(int id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+}
+
+class LibraryCatalog {
+    private ArrayList<Book> books = new ArrayList<>();
+    private int nextId = 1;
+
+    // Overloaded addBook() - auto-generated ID
+    void addBook(String title, String author) {
+        books.add(new Book(nextId++, title, author));
+    }
+
+    // Overloaded addBook() - user-provided ID
+    void addBook(int id, String title, String author) {
+        books.add(new Book(id, title, author));
+        if (id >= nextId) {
+            nextId = id + 1;
+        }
+    }
+
+    // Overloaded searchBook() by ID
+    void searchBook(int id) {
+        for (Book book : books) {
+            if (book.id == id) {
+                System.out.println("Found by ID -> " + book.id + " | " + book.title + " | " + book.author);
+                return;
+            }
+        }
+        System.out.println("Book not found for ID: " + id);
+    }
+
+    // Overloaded searchBook() by title
+    void searchBook(String title) {
+        for (Book book : books) {
+            if (book.title.equalsIgnoreCase(title)) {
+                System.out.println("Found by Title -> " + book.id + " | " + book.title + " | " + book.author);
+                return;
+            }
+        }
+        System.out.println("Book not found for title: " + title);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LibraryCatalog catalog = new LibraryCatalog();
+
+        catalog.addBook("Clean Code", "Robert C. Martin");
+        catalog.addBook(10, "Java: The Complete Reference", "Herbert Schildt");
+        catalog.addBook("Effective Java", "Joshua Bloch");
+
+        catalog.searchBook(10);
+        catalog.searchBook("Effective Java");
+        catalog.searchBook("Data Structures");
+    }
+}
+```
+
+**Output:**
+```
+Found by ID -> 10 | Java: The Complete Reference | Herbert Schildt
+Found by Title -> 11 | Effective Java | Joshua Bloch
+Book not found for title: Data Structures
+```
+
+**Conclusion:**
+In this way, method overloading was implemented using overloaded `addBook()` and `searchBook()` methods. The library catalog became more readable, flexible, and easier to use.

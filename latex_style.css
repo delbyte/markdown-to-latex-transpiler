@@ -51,7 +51,8 @@ code {
 pre {
     padding: 10px;
     overflow-x: auto;
-    page-break-inside: avoid;
+    page-break-inside: auto;
+    break-inside: auto;
 }
 
 pre code {
